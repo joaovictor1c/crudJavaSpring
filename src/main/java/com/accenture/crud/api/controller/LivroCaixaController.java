@@ -1,27 +1,26 @@
-package com.accenture.crud.controller;
+package com.accenture.crud.api.controller;
 import javax.validation.Valid;
 
-import com.accenture.crud.entity.LivroCaixa;
-import com.accenture.crud.repository.ClienteRepository;
-import com.accenture.crud.service.LivroCaixaService;
+import com.accenture.crud.domain.entity.LivroCaixa;
+import com.accenture.crud.domain.service.LivroCaixaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/livrocaixa")
 public class LivroCaixaController {
 
     @Autowired
-    LivroCaixaService livroCaixaService;
+    private LivroCaixaService livroCaixaService;
 
 
     @PostMapping("/{id}/cliente")
-    public ResponseEntity<Optional<LivroCaixa>> criar (@PathVariable int id , @Valid @RequestBody LivroCaixa livroCaixa){
+    public ResponseEntity<LivroCaixa> criar (@PathVariable int id , @Valid @RequestBody LivroCaixa livroCaixa){
 
         var livro  = livroCaixaService.criar(id, livroCaixa);
         return ResponseEntity.ok(livro);
@@ -29,16 +28,16 @@ public class LivroCaixaController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<LivroCaixa>> listarPorId (@PathVariable int id){
+    public ResponseEntity<LivroCaixa> listarPorId (@PathVariable int id){
 
-        Optional<LivroCaixa> livrocaixa = livroCaixaService.listarPorId(id);
+        LivroCaixa livrocaixa = livroCaixaService.listarPorId(id);
         return ResponseEntity.ok(livrocaixa);
     }
 
-    @GetMapping("/{clienteId}/cliente")
-    public ResponseEntity<List<LivroCaixa>> listarPorClienteId (@PathVariable int clienteId){
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<List<LivroCaixa>> listarPorClienteId (@PathVariable int id){
 
-        var livrocaixa = livroCaixaService.listarPorIdCliente(clienteId);
+        var livrocaixa = livroCaixaService.listarPorIdCliente(id);
         return ResponseEntity.ok(livrocaixa);
     }
 

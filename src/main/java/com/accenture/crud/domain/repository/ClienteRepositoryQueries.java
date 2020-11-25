@@ -1,7 +1,6 @@
-package com.accenture.crud.repository;
+package com.accenture.crud.domain.repository;
 
-import com.accenture.crud.entity.Cliente;
-import org.springframework.stereotype.Repository;
+import com.accenture.crud.domain.entity.Cliente;
 
 import java.util.List;
 

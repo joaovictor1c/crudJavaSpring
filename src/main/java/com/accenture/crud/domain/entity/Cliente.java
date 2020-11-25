@@ -1,4 +1,4 @@
-package com.accenture.crud.entity;
+package com.accenture.crud.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;

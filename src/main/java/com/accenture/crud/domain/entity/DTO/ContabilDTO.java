@@ -1,12 +1,15 @@
-package com.accenture.crud.entity.DTO;
+package com.accenture.crud.domain.entity.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ContabilDTO {
     private Integer id;
     private String nome;

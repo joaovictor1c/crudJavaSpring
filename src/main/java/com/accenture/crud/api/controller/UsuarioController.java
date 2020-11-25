@@ -1,21 +1,19 @@
-package com.accenture.crud.controller;
+package com.accenture.crud.api.controller;
 
-import com.accenture.crud.entity.Usuario;
-import com.accenture.crud.service.UsuarioService;
+import com.accenture.crud.domain.entity.Usuario;
+import com.accenture.crud.domain.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
 public class UsuarioController {
 
     @Autowired
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     @PostMapping
     public ResponseEntity<Usuario> criar (@RequestBody Usuario usuario){
@@ -32,9 +30,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Usuario>> listarPorId (@PathVariable int id){
+    public ResponseEntity<Usuario> listarPorId (@PathVariable int id){
 
-        Optional<Usuario> usuario = usuarioService.listarPorId(id);
+        Usuario usuario = usuarioService.listarPorId(id);
         return ResponseEntity.ok(usuario);
     }
 

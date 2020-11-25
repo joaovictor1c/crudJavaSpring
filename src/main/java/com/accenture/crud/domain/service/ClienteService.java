@@ -1,15 +1,12 @@
-package com.accenture.crud.service;
+package com.accenture.crud.domain.service;
 
-import com.accenture.crud.entity.Cliente;
-import com.accenture.crud.entity.Usuario;
-import com.accenture.crud.repository.ClienteRepository;
-import com.accenture.crud.repository.UsuarioRepository;
+import com.accenture.crud.domain.entity.Cliente;
+import com.accenture.crud.domain.repository.ClienteRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ClienteService {
@@ -21,12 +18,12 @@ public class ClienteService {
     }
 
 
-    public Optional<Cliente> listarPorId (int id){
+    public Cliente listarPorId (int id){
 
-        return clienteRepository.findById(id);
+        return clienteRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Error, cliente nao encontrado", Cliente.class.getName()));
     }
 
-    public Optional<Cliente> atualizar (int id, Cliente cliente){
+    public Cliente atualizar (int id, Cliente cliente){
         return clienteRepository.findById(id)
                 .map(record -> {
                     record.setNome(cliente.getNome());
@@ -38,7 +35,7 @@ public class ClienteService {
                     record.setUf(cliente.getUf());
                     record.setCep(cliente.getCep());
                     return clienteRepository.save(record);
-                });
+                }).orElseThrow(() -> new ObjectNotFoundException("Error, cliente nao encontrado", Cliente.class.getName()));
     }
 
     public void deletar(int clientId){

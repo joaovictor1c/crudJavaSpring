@@ -1,12 +1,10 @@
-package com.accenture.crud.service;
+package com.accenture.crud.domain.service;
 
-import antlr.StringUtils;
-import com.accenture.crud.entity.Usuario;
-import com.accenture.crud.repository.SessaoRepository;
+import com.accenture.crud.domain.entity.Usuario;
+import com.accenture.crud.domain.repository.SessaoRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class SessaoService {

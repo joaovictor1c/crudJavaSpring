@@ -1,7 +1,7 @@
 package com.accenture.crud.infra.Repository;
 
-import com.accenture.crud.entity.Cliente;
-import com.accenture.crud.repository.ClienteRepositoryQueries;
+import com.accenture.crud.domain.entity.Cliente;
+import com.accenture.crud.domain.repository.ClienteRepositoryQueries;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 

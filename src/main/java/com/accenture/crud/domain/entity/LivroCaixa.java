@@ -1,8 +1,8 @@
-package com.accenture.crud.entity;
+package com.accenture.crud.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,6 +17,7 @@ import java.util.Date;
 public class LivroCaixa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Setter(AccessLevel.NONE)
     private int id;
 
     @Column
@@ -39,7 +40,6 @@ public class LivroCaixa {
     @ManyToOne
     @JsonIgnore
     private Cliente cliente;
-
 
     @JsonIgnore
     public Cliente getCliente() {

@@ -1,13 +1,12 @@
-package com.accenture.crud.service;
+package com.accenture.crud.domain.service;
 
-import com.accenture.crud.entity.Usuario;
-import com.accenture.crud.repository.UsuarioRepository;
+import com.accenture.crud.domain.entity.Usuario;
+import com.accenture.crud.domain.repository.UsuarioRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Component
@@ -35,12 +34,13 @@ public class UsuarioService {
 
     }
 
-    public Optional<Usuario> listarPorId (int id){
+    public Usuario listarPorId (int id){
 
-        return usuarioRepository.findById(id);
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Error, usuario não encontrado", Usuario.class.getName()));
     }
 
-    public Optional<Usuario> atualizar (int id, Usuario usuario){
+    public Usuario atualizar (int id, Usuario usuario){
         return usuarioRepository.findById(id)
             .map(record -> {
                 record.setNome(usuario.getNome());
@@ -50,7 +50,7 @@ public class UsuarioService {
                 record.setStatus(usuario.getStatus());
                 record.setPerfil(usuario.getPerfil());
                 return usuarioRepository.save(record);
-            });
+            }).orElseThrow(() -> new ObjectNotFoundException("Error, usuario não encontrado", Usuario.class.getName()));
     }
 
     public void deletar(int userId){

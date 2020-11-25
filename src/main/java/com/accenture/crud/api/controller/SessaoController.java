@@ -1,8 +1,7 @@
-package com.accenture.crud.controller;
+package com.accenture.crud.api.controller;
 
-import com.accenture.crud.entity.Usuario;
-import com.accenture.crud.service.SessaoService;
-import com.accenture.crud.service.UsuarioService;
+import com.accenture.crud.domain.entity.Usuario;
+import com.accenture.crud.domain.service.SessaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

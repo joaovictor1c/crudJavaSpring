@@ -1,8 +1,10 @@
-package com.accenture.crud.service;
+package com.accenture.crud.domain.service;
 
-import com.accenture.crud.entity.LivroCaixa;
-import com.accenture.crud.repository.ClienteRepository;
-import com.accenture.crud.repository.LivroCaixaRepository;
+import com.accenture.crud.domain.entity.Cliente;
+import com.accenture.crud.domain.entity.LivroCaixa;
+import com.accenture.crud.domain.repository.ClienteRepository;
+import com.accenture.crud.domain.repository.LivroCaixaRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,22 +19,25 @@ public class LivroCaixaService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public Optional<LivroCaixa> criar(int id , LivroCaixa livroCaixa){
+    public LivroCaixa criar(int id , LivroCaixa livroCaixa){
         var criarLivro = clienteRepository.findById(id)
                 .map(cliente -> {
                     livroCaixa.setCliente(cliente);
                     return livroCaixaRepository.save(livroCaixa);
-                });
+                }).orElseThrow(() -> new ObjectNotFoundException("Error, cliente não encontrado", Cliente.class.getName()));
+
         return criarLivro;
     }
 
 
-    public Optional<LivroCaixa> listarPorId (int id){
+    public LivroCaixa listarPorId (int id){
 
-        return livroCaixaRepository.findById(id);
+        return livroCaixaRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Error, cliente não encontrado", Cliente.class.getName()));
+
     }
     public List<LivroCaixa> listarPorIdCliente (int id){
-        return livroCaixaRepository.findByCliente(id);
+        return livroCaixaRepository.findByClienteId(id);
     }
 
     public Optional<LivroCaixa> atualizar (int id, LivroCaixa livrocaixa){
